@@ -1,0 +1,197 @@
+## Casos de Teste: Cadastro de Conta
+
+**Funcionalidade:** Cadastro de Conta
+
+**ID da Épica:** EP-001 (Exemplo)
+
+---
+
+### Cenário 1: Cadastro de conta com nome válido
+
+**ID do Caso de Teste:** CT-001
+
+**Prioridade:** Alta
+
+**Tipo:** Positivo
+
+**Pré-condições:**
+*   Usuário autenticado e logado na plataforma.
+*   Usuário está na página de cadastro de conta.
+
+**Passos:**
+1.  Acessar a página de cadastro de conta.
+2.  Preencher o campo "Nome da conta" com um valor válido (ex: "Minha Conta Pessoal").
+3.  Clicar no botão "Salvar".
+
+**Resultados Esperados:**
+*   A conta é criada com sucesso e vinculada ao usuário logado.
+*   O sistema redireciona para a página de visualização da conta recém-criada ou para uma lista de contas, exibindo a nova conta.
+*   Nenhuma mensagem de erro é exibida.
+*   (Opcional) Uma mensagem de sucesso é exibida (ex: "Conta 'Minha Conta Pessoal' criada com sucesso!").
+
+---
+
+### Cenário 2: Tentativa de cadastro de conta sem nome
+
+**ID do Caso de Teste:** CT-002
+
+**Prioridade:** Alta
+
+**Tipo:** Negativo
+
+**Pré-condições:**
+*   Usuário autenticado e logado na plataforma.
+*   Usuário está na página de cadastro de conta.
+
+**Passos:**
+1.  Acessar a página de cadastro de conta.
+2.  Deixar o campo "Nome da conta" em branco (vazio).
+3.  Clicar no botão "Salvar".
+
+**Resultados Esperados:**
+*   A conta **não** é criada.
+*   O sistema exibe a mensagem de erro "Nome da conta é obrigatório." próximo ao campo "Nome da conta".
+*   O usuário permanece na página de cadastro de conta.
+
+---
+
+### Cenário 3: Tentativa de cadastro de conta com nome contendo apenas espaços
+
+**ID do Caso de Teste:** CT-003
+
+**Prioridade:** Média
+
+**Tipo:** Negativo
+
+**Pré-condições:**
+*   Usuário autenticado e logado na plataforma.
+*   Usuário está na página de cadastro de conta.
+
+**Passos:**
+1.  Acessar a página de cadastro de conta.
+2.  Preencher o campo "Nome da conta" com apenas espaços em branco (ex: "    ").
+3.  Clicar no botão "Salvar".
+
+**Resultados Esperados:**
+*   A conta **não** é criada.
+*   O sistema exibe a mensagem de erro "Nome da conta é obrigatório." próximo ao campo "Nome da conta".
+*   O usuário permanece na página de cadastro de conta.
+
+---
+
+### Cenário 4: Verificação da interface do usuário (UI)
+
+**ID do Caso de Teste:** CT-004
+
+**Prioridade:** Alta
+
+**Tipo:** Positivo (UI/UX)
+
+**Pré-condições:**
+*   Usuário autenticado e logado na plataforma.
+*   Usuário está na página de cadastro de conta.
+
+**Passos:**
+1.  Acessar a página de cadastro de conta.
+
+**Resultados Esperados:**
+*   A interface exibe o campo de entrada de texto rotulado como "Nome da conta".
+*   A interface exibe um botão claramente identificável como "Salvar".
+
+---
+
+### Cenário 5: Cancelar o cadastro da conta
+
+**ID do Caso de Teste:** CT-005
+
+**Prioridade:** Baixa
+
+**Tipo:** Positivo
+
+**Pré-condições:**
+*   Usuário autenticado e logado na plataforma.
+*   Usuário está na página de cadastro de conta.
+
+**Passos:**
+1.  Acessar a página de cadastro de conta.
+2.  (Opcional) Preencher o campo "Nome da conta" com um valor.
+3.  Clicar no botão "Cancelar" (ou equivalente, se existir).
+
+**Resultados Esperados:**
+*   O sistema redireciona para a página anterior ou para a página inicial (sem salvar a conta).
+*   A conta **não** é criada.
+*   Nenhuma mensagem de erro é exibida.
+
+---
+
+### Cenário 6: Limites de caracteres para o nome da conta (se aplicável)
+
+**ID do Caso de Teste:** CT-006
+
+**Prioridade:** Média
+
+**Tipo:** Positivo/Negativo
+
+**Pré-condições:**
+*   Usuário autenticado e logado na plataforma.
+*   Usuário está na página de cadastro de conta.
+
+**Passos:**
+1.  Acessar a página de cadastro de conta.
+2.  **Sub-cenário 6.1 (Positivo):** Preencher o campo "Nome da conta" com o número máximo permitido de caracteres (Ex: 50 caracteres).
+3.  Clicar em "Salvar".
+4.  **Sub-cenário 6.2 (Negativo):** Preencher o campo "Nome da conta" com um nome que excede o número máximo permitido de caracteres (Ex: 51 caracteres).
+5.  Clicar em "Salvar".
+
+**Resultados Esperados:**
+*   **Sub-cenário 6.1:** A conta é criada com sucesso.
+*   **Sub-cenário 6.2:** O sistema exibe uma mensagem de erro indicando que o nome excede o limite de caracteres (Ex: "O nome da conta não pode exceder 50 caracteres."). A conta não é criada.
+
+---
+
+### Cenário 7: Caracteres especiais no nome da conta (se aplicável)
+
+**ID do Caso de Teste:** CT-007
+
+**Prioridade:** Média
+
+**Tipo:** Positivo/Negativo
+
+**Pré-condições:**
+*   Usuário autenticado e logado na plataforma.
+*   Usuário está na página de cadastro de conta.
+
+**Passos:**
+1.  Acessar a página de cadastro de conta.
+2.  **Sub-cenário 7.1 (Positivo):** Preencher o campo "Nome da conta" com caracteres especiais permitidos (Ex: "Minha Conta #1!").
+3.  Clicar em "Salvar".
+4.  **Sub-cenário 7.2 (Negativo - se houver restrição):** Preencher o campo "Nome da conta" com caracteres especiais **não** permitidos (Ex: "Minha Conta <script>").
+5.  Clicar em "Salvar".
+
+**Resultados Esperados:**
+*   **Sub-cenário 7.1:** A conta é criada com sucesso.
+*   **Sub-cenário 7.2:** O sistema exibe uma mensagem de erro indicando que o nome contém caracteres inválidos (Ex: "O nome da conta contém caracteres não permitidos."). A conta não é criada.
+
+---
+
+### Cenário 8: Cadastro de conta com nome duplicado (se permitido ou não)
+
+**ID do Caso de Teste:** CT-008
+
+**Prioridade:** Média
+
+**Tipo:** Positivo/Negativo
+
+**Pré-condições:**
+*   Usuário autenticado e logado na plataforma.
+*   Usuário está na página de cadastro de conta.
+*   Já existe uma conta com o nome "Minha Conta Pessoal" associada ao usuário logado.
+
+**Passos:**
+1.  Acessar a página de cadastro de conta.
+2.  Preencher o campo "Nome da conta" com um nome que já existe para o usuário logado (Ex: "Minha Conta Pessoal").
+3.  Clicar no botão "Salvar".
+
+**Resultados Esperados:**
+*   **Se nomes duplicados são permitidos:** A conta é criada com sucesso.
+*   **Se nomes duplicados NÃO são permitidos:** O sistema exibe uma mensagem de erro (Ex: "Você já possui uma conta com este nome. Por favor, escolha um nome diferente."). A conta não é criada.

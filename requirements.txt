@@ -5,3 +5,4 @@ eyes-selenium
 flask
 PyJWT
 google-genai
+python-dotenv

@@ -1,0 +1,171 @@
+Aqui estão os casos de teste para a funcionalidade de cadastro de conta, baseados na user story, critérios de aceitação, regras de negócio e erros conhecidos fornecidos.
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P1 @componente:ui
+CT-002: Exibição da interface de cadastro de conta
+Condições de entrada:
+- Usuário autenticado e na página de cadastro de conta.
+Passo a passo:
+1. Navegar para a página de cadastro de conta (assumindo que há um link ou botão para isso após o login).
+Saída Esperada:
+- A interface exibe o campo "Nome da conta".
+- A interface exibe o botão "Salvar".
+Rastreabilidade: CA05
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P1 @componente:backend
+CT-003: Cadastro de conta com nome válido (mínimo de caracteres)
+Condições de entrada:
+- Usuário autenticado.
+- Nenhum usuário possui uma conta com o nome "ABC".
+Passo a passo:
+1. Navegar para a página de cadastro de conta.
+2. Preencher o campo "Nome da conta" com "ABC".
+3. Clicar no botão "Salvar".
+Saída Esperada:
+- A conta "ABC" é criada com sucesso e vinculada ao usuário logado.
+- O sistema redireciona para a tela de listagem de contas ou exibe uma mensagem de sucesso.
+Rastreabilidade: CA07, RN15
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P1 @componente:backend
+CT-004: Cadastro de conta com nome válido (máximo de caracteres)
+Condições de entrada:
+- Usuário autenticado.
+- Nenhum usuário possui uma conta com o nome "abcdefghijklmnopqrst".
+Passo a passo:
+1. Navegar para a página de cadastro de conta.
+2. Preencher o campo "Nome da conta" com "abcdefghijklmnopqrst" (20 caracteres).
+3. Clicar no botão "Salvar".
+Saída Esperada:
+- A conta "abcdefghijklmnopqrst" é criada com sucesso e vinculada ao usuário logado.
+- O sistema redireciona para a tela de listagem de contas ou exibe uma mensagem de sucesso.
+Rastreabilidade: CA07, RN15
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P1 @componente:backend
+CT-005: Tentativa de cadastro de conta sem nome
+Condições de entrada:
+- Usuário autenticado.
+Passo a passo:
+1. Navegar para a página de cadastro de conta.
+2. Deixar o campo "Nome da conta" em branco.
+3. Clicar no botão "Salvar".
+Saída Esperada:
+- O sistema exibe a mensagem "Nome da conta é obrigatório.".
+- A conta não é criada.
+Rastreabilidade: CA06, CA08
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P1 @componente:backend
+CT-006: Tentativa de cadastro de conta com nome contendo apenas espaços
+Condições de entrada:
+- Usuário autenticado.
+Passo a passo:
+1. Navegar para a página de cadastro de conta.
+2. Preencher o campo "Nome da conta" com apenas espaços ("   ").
+3. Clicar no botão "Salvar".
+Saída Esperada:
+- O sistema exibe a mensagem "Nome da conta é obrigatório.".
+- A conta não é criada.
+Rastreabilidade: CA08
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P2 @componente:backend
+CT-007: Tentativa de cadastro de conta com nome inválido (menos de 3 caracteres)
+Condições de entrada:
+- Usuário autenticado.
+Passo a passo:
+1. Navegar para a página de cadastro de conta.
+2. Preencher o campo "Nome da conta" com "AB".
+3. Clicar no botão "Salvar".
+Saída Esperada:
+- O sistema exibe uma mensagem de erro indicando que o nome da conta deve ter no mínimo 3 caracteres (Ex: "Nome da conta deve ter entre 3 e 20 caracteres.").
+- A conta não é criada.
+Rastreabilidade: RN15
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P2 @componente:backend
+CT-008: Tentativa de cadastro de conta com nome inválido (mais de 20 caracteres)
+Condições de entrada:
+- Usuário autenticado.
+Passo a passo:
+1. Navegar para a página de cadastro de conta.
+2. Preencher o campo "Nome da conta" com "abcdefghijklmnopqrstU" (21 caracteres).
+3. Clicar no botão "Salvar".
+Saída Esperada:
+- O sistema exibe uma mensagem de erro indicando que o nome da conta deve ter no máximo 20 caracteres (Ex: "Nome da conta deve ter entre 3 e 20 caracteres.").
+- A conta não é criada.
+Rastreabilidade: RN15
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P1 @componente:backend
+CT-009: Tentativa de cadastro de conta com nome já existente para o mesmo usuário
+Condições de entrada:
+- Usuário autenticado.
+- Usuário já possui uma conta chamada "Minha Carteira".
+Passo a passo:
+1. Navegar para a página de cadastro de conta.
+2. Preencher o campo "Nome da conta" com "Minha Carteira".
+3. Clicar no botão "Salvar".
+Saída Esperada:
+- O sistema exibe uma mensagem de erro informando que o nome da conta já existe para o usuário logado (Ex: "Já existe uma conta com este nome para o seu usuário.").
+- A conta não é criada.
+Rastreabilidade: RN18
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P3 @componente:backend
+CT-010: Cadastro de conta com nome existente para OUTRO usuário
+Condições de entrada:
+- Usuário autenticado.
+- Outro usuário possui uma conta chamada "Conta Pessoal".
+- O usuário logado NÃO possui uma conta chamada "Conta Pessoal".
+Passo a passo:
+1. Navegar para a página de cadastro de conta.
+2. Preencher o campo "Nome da conta" com "Conta Pessoal".
+3. Clicar no botão "Salvar".
+Saída Esperada:
+- A conta "Conta Pessoal" é criada com sucesso e vinculada ao usuário logado.
+- O sistema redireciona para a tela de listagem de contas ou exibe uma mensagem de sucesso.
+Rastreabilidade: RN18 (garantir que a unicidade é por usuário)
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P1 @componente:backend @BUG-10
+CT-011: Cadastro de conta com nome de 6 caracteres (teste para BUG-10)
+Condições de entrada:
+- Usuário autenticado.
+- Nenhum usuário possui uma conta com o nome "Teste6".
+Passo a passo:
+1. Navegar para a página de cadastro de conta.
+2. Preencher o campo "Nome da conta" com "Teste6".
+3. Clicar no botão "Salvar".
+Saída Esperada:
+- A conta "Teste6" é criada com sucesso e vinculada ao usuário logado.
+- O sistema redireciona para a tela de listagem de contas ou exibe uma mensagem de sucesso.
+Rastreabilidade: CA07, RN15, BUG-10
+
+---
+
+@cadastro_conta @SB-1522 @prioridade:P1 @componente:backend @BUG-20
+CT-012: Cadastro de conta com o nome "Conta Corrente" (teste para BUG-20)
+Condições de entrada:
+- Usuário autenticado.
+- Nenhum usuário possui uma conta com o nome "Conta Corrente".
+Passo a passo:
+1. Navegar para a página de cadastro de conta.
+2. Preencher o campo "Nome da conta" com "Conta Corrente".
+3. Clicar no botão "Salvar".
+Saída Esperada:
+- A conta "Conta Corrente" é criada com sucesso e vinculada ao usuário logado.
+- O sistema redireciona para a tela de listagem de contas ou exibe uma mensagem de sucesso.
+Rastreabilidade: CA07, RN15, BUG-20

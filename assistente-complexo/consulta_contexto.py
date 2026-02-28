@@ -8,8 +8,13 @@ from google import genai
 from google.genai import types
 import json
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 # ============== CONFIG ==================
-GEMINI_API_KEY = ""  # Insira sua chave da API aqui
+
+GEMINI_API_KEY = os.getenv("API_KEY_GEMINI") # chave da API GEMINI no .env
 MODEL = "gemini-2.5-flash"
 UPLOADED_JSON = "uploaded_files.json"
 USE_CONTEXT_FILES = True  # Flag para controlar o envio de arquivos de contexto

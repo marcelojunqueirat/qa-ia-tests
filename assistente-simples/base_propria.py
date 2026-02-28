@@ -2,7 +2,12 @@ from google import genai
 from google.genai import types
 import textwrap
 
-GEMINI_API_KEY = '' # Insira sua chave da API aqui
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("API_KEY_GEMINI") # chave da API GEMINI no .env
 MODEL = 'gemini-2.5-flash'
 
 PROMPT_USUARIO = """

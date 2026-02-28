@@ -4,3 +4,15 @@ __pycache__
 .pytest_cache
 results
 *.xml
+.env
+# Sensitive / local secrets
+uploaded_files.json
+.env.local
+.env.*
+*.pem
+*.key
+*.p12
+*.jks
+*.crt
+credentials.json
+secret*.yaml

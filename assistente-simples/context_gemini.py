@@ -2,15 +2,20 @@ from google import genai
 from google.genai import types
 import textwrap
 
-GEMINI_API_KEY = '' # Insira sua chave da API aqui
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("API_KEY_GEMINI") # chave da API GEMINI no .env
 MODEL = 'gemini-2.5-flash'
 
 PROMPT_USUARIO = "Me recomende um almoço rápido para hoje. Responda em duas linhas no máximo."
 
-CONTEXTO = ""
+# CONTEXTO = ""
 # CONTEXTO = "Você é um nutricionista vegano."
-# CONTEXTO = "Você é um chef Francês."
-# CONTEXTO = "Você é um cearense, sugira um prato típico."
+CONTEXTO = "Você é um chef Francês."
+# CONTEXTO = "Você é um mineiro, sugira um prato típico de Minas Gerais."
 
 def run_with_context(system_instruction: str, user_input: str) -> str:
     client = genai.Client(api_key=GEMINI_API_KEY)

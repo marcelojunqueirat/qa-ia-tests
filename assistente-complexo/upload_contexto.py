@@ -8,9 +8,13 @@ from google.genai import types
 from pathlib import Path
 import json
 import mimetypes
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # ============== CONFIG ==================
-GEMINI_API_KEY = ""  # Insira sua chave da API aqui
+
+GEMINI_API_KEY = os.getenv("API_KEY_GEMINI") # chave da API GEMINI no .env
 UPLOAD_DIR = "docs"                 # pasta com seus arquivos
 OUTPUT_JSON = "uploaded_files.json" # onde salvar IDs/URIs
 DISPLAY_NAME_PREFIX = "CursoQA-"    # prefixo opcional
